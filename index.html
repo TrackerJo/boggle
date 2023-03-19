@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
+    <title>Vite App</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Welcome to Boggle</h1>
+      
+      <div id="board-div" class="hidden">
+        <h3 id="score">Score: 0</h3>
+        <h3 id="time">Time: 60</h3>
+        <table id="boggle-board" class="noselect">
+          
+        </table>
+        <div id="word-list-div">
+          <h2>Words</h2>
+          <ul id="word-list">
+            
+          </ul>
+        </div>
+      </div>
+     
+      <div id="welcome">
+        <h2>How to play</h2>
+        <p>Click on the letters to form words. Words must be at least 3 letters long and must be in the dictionary. You have 60 seconds to find as many words as you can. Good luck!</p>
+        <button id="start-btn">Start</button>
+      </div>
+      <div id="game-over" class="hidden">
+        <h2>Game Over</h2>
+        <p id="final-score">Your score is 0</span></p>
+        <button id="play-again-btn">Play Again</button>
+        <button id="share-btn">Share Game</button>
+      </div>
+    </div>
+
+
+    <script src="WordList-JS-master/src/wordList.min.js"></script>
+    <script src="WordList-JS-master/src/wordBank.min.js"></script>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
