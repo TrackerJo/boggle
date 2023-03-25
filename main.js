@@ -63,6 +63,10 @@ let eventOverType = 'mouseover';
 if ('ontouchstart' in window) {
   eventStartType = 'touchstart';
   eventOverType = 'touchmove';
+  //Disable scrolling
+  document.body.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+  }, { passive: false });
 }
 const startTime = 10;
 let selectedLetters = "";
