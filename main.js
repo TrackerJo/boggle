@@ -109,8 +109,8 @@ window.addEventListener(eventStartType, function(e) {
       //The cursor is absolutely positioned, so we need to check if the cursor is within the cell
       const cell = boardCells[i];
       const cellRect = cell.getBoundingClientRect();
-      if (e.pageX >= cellRect.left && e.pageX <= cellRect.right && e.pageY >= cellRect.top && e.pageY <= cellRect.bottom) {
-        mouseOverCell(e);
+      if (cursor.pageX >= cellRect.left && cursor.pageX <= cellRect.right && cursor.pageY >= cellRect.top && cursor.pageY <= cellRect.bottom) {
+        mouseOverCell(cell);
       }
       
     }
