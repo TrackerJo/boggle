@@ -9,6 +9,7 @@ const customGameBtn = document.getElementById('custom-game-btn');
 const customGamePrompt = document.getElementById('custom-game-prompt');
 const customGameSeedInput = document.getElementById('custom-board');
 const customGameTimeInput = document.getElementById('custom-time');
+const customGameMinLengthInput = document.getElementById('custom-min-length');
 const customGameStartBtn = document.getElementById('custom-game-start-btn');
 const wordListDiv = document.getElementById('word-list');
 const scoreLabel = document.getElementById('score');
@@ -19,6 +20,7 @@ const shareBtn = document.getElementById('share-btn');
 
 
 let startTime = 100;
+let minLength = 3;
 let selectedLetters = "";
 let selectedCells = [];
 let pastCells = [];
@@ -29,6 +31,7 @@ let customGamePromptOpen = false;
 let isCustomGame = false;
 
 const scoring = {
+  2: 50,
   3: 100,
   4: 400,
   5: 800,
@@ -106,8 +109,13 @@ if (urlParams.has('boardSeed')) {
 else {
   board = generateRandomBoggleBoard();
 }
+
 if(urlParams.has('time')) {
   startTime = parseInt(urlParams.get('time'));
+}
+
+if(urlParams.has('minLength')) {
+  minLength = parseInt(urlParams.get('minLength'));
 }
 
 
@@ -237,7 +245,7 @@ async function checkWord(word) {
   //Check if word is in dictionary
   let wordExists = await inWordList(word);
   console.log("Done checking word", wordExists);
-  if (wordExists && doneWords.indexOf(word) === -1 && word.length > 2) {
+  if (wordExists && doneWords.indexOf(word) === -1 && word.length >= minLength) {
     console.log(word + " was there!");
     score += scoring[word.length];
     scoreLabel.textContent = "Score: " + score;
@@ -396,6 +404,7 @@ shareBtn.addEventListener('click', function() {
   url += "&score=" + score;
   if(isCustomGame){
     url += "&time=" + startTime;
+    url += "&minLength=" + minLength;
   }
   
   navigator.clipboard.writeText(url).then(function() {
@@ -453,6 +462,7 @@ function clearBoardDiv(){
 customGameStartBtn.addEventListener('click', function() {
   let boardSeed = customGameSeedInput.value;
   let customTime = customGameTimeInput.value;
+  let minWordLength = customGameMinLengthInput.value;
   if(boardSeed.length === 19) {
     board = loadCustomBoard(boardSeed);
     clearBoardDiv();
@@ -462,6 +472,10 @@ customGameStartBtn.addEventListener('click', function() {
     
     alert("Invalid board seed!");
     return
+  }
+  if(minWordLength.length !== 0) {
+    minWordLength = parseInt(minWordLength);
+    minLength = minWordLength;
   }
   isCustomGame = true;
   customGamePrompt.classList.remove('active');
