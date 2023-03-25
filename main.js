@@ -70,7 +70,7 @@ if ('ontouchstart' in window) {
     e.preventDefault();
   }, { passive: false });
 }
-const startTime = 10;
+const startTime = 100;
 let selectedLetters = "";
 let selectedCells = [];
 let pastCells = [];
@@ -111,6 +111,7 @@ window.addEventListener(eventStartType, function(e) {
       const cellRect = cell.getBoundingClientRect();
       if (e.pageX >= cellRect.left && e.pageX <= cellRect.right && e.pageY >= cellRect.top && e.pageY <= cellRect.bottom) {
         mouseOverCell(cell);
+        alert('over cell');
       }
       
     }
