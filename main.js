@@ -1,9 +1,12 @@
 
+import wordlistURL from './wordlist.txt';
+
 let boardCells = [];
 let eventStartType = 'mousedown';
 let eventMouseOver = 'mouseover';
 let isMobile = false;
 const submitBtn = document.getElementById('submit-word');
+
 //Check if touch screen
 if ('ontouchstart' in window) {
   isMobile = true;
@@ -184,7 +187,8 @@ async function inWordList(word) {
 
   
   //Split wordlist into array
-  let wordlist = loadFile("./wordlist.txt").split("\n");
+  let wordlist = await loadFile(wordlistURL)
+  wordlist = wordlist.split("\n");
   console.log("Checking word: " + word);
   //Check if word is in wordlist
   if (wordlist.includes(word)) {
@@ -196,7 +200,7 @@ async function inWordList(word) {
   }
 }
 
-function loadFile(filePath) {
+async function loadFile(filePath) {
   var result = null;
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.open("GET", filePath, false);
