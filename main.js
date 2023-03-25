@@ -63,8 +63,8 @@ let isMobile = false;
 //Check if touch screen
 if ('ontouchstart' in window) {
   isMobile = true;
-  eventStartType = 'touchstart';
-  eventOverType = 'touchmove';
+  eventStartType = 'touchmove';
+  eventOverType = 'touchover';
   //Disable scrolling
   document.body.addEventListener('touchmove', function(e) {
     e.preventDefault();
