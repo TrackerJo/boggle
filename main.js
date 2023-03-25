@@ -1,11 +1,45 @@
 
 import wordlistURL from './wordlist.txt';
 
+
+const submitBtn = document.getElementById('submit-word');
+const boggleDiv = document.getElementById('board-div');
+const startBtn = document.getElementById('start-btn');
+const customGameBtn = document.getElementById('custom-game-btn');
+const customGamePrompt = document.getElementById('custom-game-prompt');
+const customGameSeedInput = document.getElementById('custom-board');
+const customGameTimeInput = document.getElementById('custom-time');
+const customGameStartBtn = document.getElementById('custom-game-start-btn');
+const wordListDiv = document.getElementById('word-list');
+const scoreLabel = document.getElementById('score');
+const timeLabel = document.getElementById('time');
+const gameOverDiv = document.getElementById('game-over');
+const playAgainBtn = document.getElementById('play-again-btn');
+const shareBtn = document.getElementById('share-btn');
+
+
+let startTime = 100;
+let selectedLetters = "";
+let selectedCells = [];
+let pastCells = [];
+let score = 0;
+let doneWords = [];
 let boardCells = [];
+let customGamePromptOpen = false;
+let isCustomGame = false;
+
+const scoring = {
+  3: 100,
+  4: 400,
+  5: 800,
+  6: 1400,
+  7: 1800,
+  8: 2200
+}
+let isSelectingWord = false;
 let eventStartType = 'mousedown';
 let eventMouseOver = 'mouseover';
 let isMobile = false;
-const submitBtn = document.getElementById('submit-word');
 
 //Check if touch screen
 if ('ontouchstart' in window) {
@@ -15,6 +49,7 @@ if ('ontouchstart' in window) {
   submitBtn.classList.remove('hidden');
   
 }
+
 function generateRandomBoggleBoard() {
   const board = [];
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -71,30 +106,11 @@ if (urlParams.has('boardSeed')) {
 else {
   board = generateRandomBoggleBoard();
 }
-const boggleDiv = document.getElementById('board-div');
-const startBtn = document.getElementById('start-btn');
-const wordListDiv = document.getElementById('word-list');
-const scoreLabel = document.getElementById('score');
-const timeLabel = document.getElementById('time');
-const gameOverDiv = document.getElementById('game-over');
-const playAgainBtn = document.getElementById('play-again-btn');
-const shareBtn = document.getElementById('share-btn');
-
-const startTime = 100;
-let selectedLetters = "";
-let selectedCells = [];
-let pastCells = [];
-let score = 0;
-let doneWords = [];
-const scoring = {
-  3: 100,
-  4: 400,
-  5: 800,
-  6: 1400,
-  7: 1800,
-  8: 2200
+if(urlParams.has('time')) {
+  startTime = parseInt(urlParams.get('time'));
 }
-let isSelectingWord = false;
+
+
 console.log('Boggle Board:', board);
 printBoard(board);
 fillTableWithBoard(board);
@@ -275,6 +291,7 @@ async function checkWord(word) {
   }
 }
 function startTimer(){
+  timeLabel.textContent = "Time: " + startTime;
   var start = Date.now();
   let timer = setInterval(function() {
       var delta = Date.now() - start; // milliseconds elapsed since start
@@ -377,6 +394,9 @@ shareBtn.addEventListener('click', function() {
   url += "?boardSeed=" + boardSeed;
   //Add the score to the url
   url += "&score=" + score;
+  if(isCustomGame){
+    url += "&time=" + startTime;
+  }
   
   navigator.clipboard.writeText(url).then(function() {
     console.log('Async: Copying to clipboard was successful!');
@@ -387,3 +407,70 @@ shareBtn.addEventListener('click', function() {
   
 })
 
+customGameBtn.addEventListener('click', function() {
+  if(customGamePrompt.classList.contains('inactive')) {
+    customGamePrompt.classList.remove('inactive');
+  }
+  else{
+    customGamePrompt.classList.remove('hidden');
+  }
+  customGamePrompt.classList.add('active');
+  customGamePromptOpen = true;
+
+  
+  
+})
+
+//Check when escape is pressed
+document.addEventListener('keydown', function(event) {
+  if(event.key === "Escape" && customGamePromptOpen) {
+    customGamePrompt.classList.remove('active');
+    customGamePrompt.classList.add('inactive');
+    customGamePromptOpen = false;
+  }
+})
+
+function loadCustomBoard(boardSeed){
+  let board = [];
+  let decodedBoardSeed = boardSeed.split('.');
+  for(let i = 0; i < decodedBoardSeed.length; i++){
+    const row = [];
+    for (let index = 0; index < 4; index++) {
+      const letter = decodedBoardSeed[i].charAt(index);
+      row.push(letter);
+    }
+    board.push(row);
+  }
+  return board;
+}
+
+function clearBoardDiv(){
+ //Clear the board table
+ let table = document.getElementById('boggle-board');
+  table.innerHTML = "";
+}
+
+customGameStartBtn.addEventListener('click', function() {
+  let boardSeed = customGameSeedInput.value;
+  let customTime = customGameTimeInput.value;
+  if(boardSeed.length === 19) {
+    board = loadCustomBoard(boardSeed);
+    clearBoardDiv();
+    fillTableWithBoard(board);
+  }
+  else if(boardSeed.length !== 0){
+    
+    alert("Invalid board seed!");
+    return
+  }
+  isCustomGame = true;
+  customGamePrompt.classList.remove('active');
+  customGamePrompt.classList.add('inactive');
+  customGamePromptOpen = false;
+  startTime = customTime;
+  boggleDiv.classList.remove('hidden');
+  startBtn.parentElement.classList.add('hidden');
+  startTimer();
+
+  
+})

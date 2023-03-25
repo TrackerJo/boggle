@@ -37,3 +37,62 @@ tr{
   display: none;
 }
 
+#custom-game-prompt{
+  background-color:lightblue;
+  width: 400px;
+  height: 300px;
+  position: absolute;
+
+  border: 1px solid;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+
+}
+
+.inactive{
+  top: -50%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  animation: popupExit 0.5s;
+}
+
+.active {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /*Create an animation so it looks the the popup came from the top of the screen*/
+  animation: popupEnter 0.5s;
+
+}
+
+@keyframes popupEnter {
+  0% {
+    top: 0%;
+  }
+  100% {
+    top: 50%;
+  }
+}
+
+@keyframes popupExit {
+  0% {
+    top: 50%;
+  }
+  100% {
+    top: -50%;
+  }
+}
+
+#custom-game-prompt h1{
+  font-size: xx-large;
+}
+
+#custom-game-start-btn{
+  background-color: lightgreen;
+  border: 1px solid;
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+  font-size: large;
+}
