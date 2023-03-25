@@ -3,11 +3,13 @@ let boardCells = [];
 let eventStartType = 'mousedown';
 let eventMouseOver = 'mouseover';
 let isMobile = false;
+const submitBtn = document.getElementById('submit-word');
 //Check if touch screen
 if ('ontouchstart' in window) {
   isMobile = true;
   eventStartType = 'touchmove';
   eventMouseOver = 'click';
+  submitBtn.classList.remove('hidden');
   
 }
 function generateRandomBoggleBoard() {
@@ -103,6 +105,7 @@ window.addEventListener(eventStartType, function(e) {
   if(!e.target.classList.contains('cell')) {
     return;
   }
+  mouseOverCell(e);
 
   isSelectingWord = true;
   // if(isMobile) {
@@ -200,6 +203,13 @@ window.addEventListener('mouseup', function(e) {
  clearSelectedLetters(true);
   
 })
+
+if(isMobile) {
+  submitBtn.addEventListener('click', function(e) {
+    checkWord(wordInput.value);
+    clearSelectedLetters(true);
+  })
+}
 
 function checkWord(word) {
   console.log("Checking word: " + word);
