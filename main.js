@@ -111,17 +111,16 @@ window.addEventListener(eventStartType, function(e) {
         break;
       }
     }
-  }
-
-
-  mouseOverCell(e);
-  for (let i = 0; i < boardCells.length; i++) {
-    //Make sure cell is actually a cell
-    console.log(boardCells[i].nodeName);
-   
-      boardCells[i].addEventListener(eventOverType, mouseOverCell);
+  } else {
+    mouseOverCell(e);
+    for (let i = 0; i < boardCells.length; i++) {
+      //Make sure cell is actually a cell
+      console.log(boardCells[i].nodeName);
     
-    
+        boardCells[i].addEventListener(eventOverType, mouseOverCell);
+      
+      
+    }
   }
 })
 
