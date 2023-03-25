@@ -99,30 +99,30 @@ window.addEventListener(eventStartType, function(e) {
   }
 
   isSelectingWord = true;
-  if(isMobile) {
-    cursor.style.display = 'block';
-    cursor.style.left = e.pageX + 'px';
-    cursor.style.top = e.pageY + 'px';
-    console.log(e.pageX, e.pageY);
-    //Check if cursor is over a cell
-    for (let i = 0; i < boardCells.length; i++) {
-      //The cursor is absolutely positioned, so we need to check if the cursor is within the cell, not the cell within the cursor
-      const cell = boardCells[i];
-      //Get the cell's position relative to the same parent as the cursor
-      const cellRect = cell.getBoundingClientRect();
-      //get the cursor's position relative to the same parent as the cell
-      const cursorRect = cursor.getBoundingClientRect();
-      alert(cellRect.left + ' ' + cellRect.right + ' ' + cellRect.top + ' ' + cellRect.bottom);
-      alert(cursorRect.left + ' ' + cursorRect.right + ' ' + cursorRect.top + ' ' + cursorRect.bottom);
-      if (cursorRect.left >= cellRect.left && cursorRect.right <= cellRect.right && cursorRect.top >= cellRect.top && cursorRect.bottom <= cellRect.bottom) {
-        console.log('Cursor is over cell');
-        mouseOverCell(e);
-        break;
-      }
+  // if(isMobile) {
+  //   cursor.style.display = 'block';
+  //   cursor.style.left = e.pageX + 'px';
+  //   cursor.style.top = e.pageY + 'px';
+  //   console.log(e.pageX, e.pageY);
+  //   //Check if cursor is over a cell
+  //   for (let i = 0; i < boardCells.length; i++) {
+  //     //The cursor is absolutely positioned, so we need to check if the cursor is within the cell, not the cell within the cursor
+  //     const cell = boardCells[i];
+  //     //Get the cell's position relative to the same parent as the cursor
+  //     const cellRect = cell.getBoundingClientRect();
+  //     //get the cursor's position relative to the same parent as the cell
+  //     const cursorRect = cursor.getBoundingClientRect();
+  //     alert(cellRect.left + ' ' + cellRect.right + ' ' + cellRect.top + ' ' + cellRect.bottom);
+  //     alert(cursorRect.left + ' ' + cursorRect.right + ' ' + cursorRect.top + ' ' + cursorRect.bottom);
+  //     if (cursorRect.left >= cellRect.left && cursorRect.right <= cellRect.right && cursorRect.top >= cellRect.top && cursorRect.bottom <= cellRect.bottom) {
+  //       console.log('Cursor is over cell');
+  //       mouseOverCell(e);
+  //       break;
+  //     }
 
       
-    }
-  } else {
+  //   }
+  // } else {
     mouseOverCell(e);
     for (let i = 0; i < boardCells.length; i++) {
       //Make sure cell is actually a cell
@@ -132,7 +132,7 @@ window.addEventListener(eventStartType, function(e) {
       
       
     }
-  }
+ // }
 })
 
 function mouseOverCell(e) {
