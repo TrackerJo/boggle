@@ -23,8 +23,8 @@
     <meta property="twitter:title" content="Boggle - By TrackerJo">
     <meta property="twitter:description" content="Play Boggle by yourself or against someone else's score and board to see if you can beat them!">
     <meta property="twitter:image" content="http://www.baggle.org/img/grille.png">
-    <script type="module" crossorigin src="/boggle/assets/index-ec6c4328.js"></script>
-    <link rel="stylesheet" href="/boggle/assets/index-2e69514d.css">
+    <script type="module" crossorigin src="/boggle/assets/index-3b87c647.js"></script>
+    <link rel="stylesheet" href="/boggle/assets/index-b6329c3b.css">
   </head>
   <body>
     <div id="app">
@@ -32,7 +32,7 @@
       
       <div id="board-div" class="hidden">
         <h3 id="score">Score: 0</h3>
-        <h3 id="time">Time: 60</h3>
+        <h3 id="time">Time: </h3>
         <table id="boggle-board" class="noselect">
           
         </table>
@@ -47,8 +47,21 @@
      
       <div id="welcome">
         <h2>How to play</h2>
-        <p>Click on the letters to form words. Words must be at least 3 letters long and must be in the dictionary. You have 60 seconds to find as many words as you can. Good luck!</p>
+        <p>Click on the letters to form words. Words must be at least 3 letters long and must be in the dictionary. Find as many words as you can before time runs out. Good luck!</p>
         <button id="start-btn">Start</button>
+        <button id="custom-game-btn">Create Custom Game</button>
+        <div id="custom-game-prompt" class="hidden">
+          <h2>Custom Game</h2>
+          <p>Enter a board and a time limit to create a custom game. The board must be 16 letters long, each row is seperated by a period, and the time limit must be a number between 1 and 10.</p>
+          <label for="custom-board">Board (Optional)</label>
+          <input type="text" id="custom-board" placeholder="Ex: ABDW.ADWQ.QDQW.QDWQ">
+          <br>
+          <label for="custom-time">Time Limit (in Seconds)</label>
+          <input type="number" id="custom-time" placeholder="Ex: 60" min="0">
+          <br>
+          <br>
+          <button id="custom-game-start-btn">Start</button>
+        </div>
       </div>
       <div id="game-over" class="hidden">
         <h2>Game Over</h2>
