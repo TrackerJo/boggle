@@ -94,9 +94,9 @@ window.addEventListener(eventStartType, function(e) {
   const table = document.getElementById('boggle-board');
   const cells = table.getElementsByTagName('td');
   //Check if mouse is over a cell
-  if(!e.target.classList.contains('cell')) {
-    return;
-  }
+  // if(!e.target.classList.contains('cell')) {
+  //   return;
+  // }
 
   isSelectingWord = true;
   // if(isMobile) {
