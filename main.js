@@ -7,7 +7,7 @@ let isMobile = false;
 if ('ontouchstart' in window) {
   isMobile = true;
   eventStartType = 'touchmove';
-  eventOverType = 'touchover';
+  eventMouseOver = 'touchover';
   //Disable scrolling
   document.body.addEventListener('touchmove', function(e) {
     e.preventDefault();
