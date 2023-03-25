@@ -1,4 +1,4 @@
-html, body {margin: 0; height: 100%; overflow: hidden}
+
 
 table, th, td {
   border: 1px solid;
@@ -37,13 +37,3 @@ tr{
   display: none;
 }
 
-#cursor{
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  user-select: none;
-  -drag: none;
-  -moz-user-select: none;
-  -webkit-user-drag: none;
-  -webkit-user-select: none;
-}

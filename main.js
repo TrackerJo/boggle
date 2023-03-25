@@ -76,7 +76,6 @@ const timeLabel = document.getElementById('time');
 const gameOverDiv = document.getElementById('game-over');
 const playAgainBtn = document.getElementById('play-again-btn');
 const shareBtn = document.getElementById('share-btn');
-const cursor = document.getElementById('cursor');
 
 const startTime = 100;
 let selectedLetters = "";
@@ -89,7 +88,8 @@ const scoring = {
   4: 400,
   5: 800,
   6: 1400,
-  7: 1800
+  7: 1800,
+  8: 2200
 }
 let isSelectingWord = false;
 console.log('Boggle Board:', board);
@@ -108,40 +108,7 @@ window.addEventListener(eventStartType, function(e) {
   mouseOverCell(e);
 
   isSelectingWord = true;
-  // if(isMobile) {
-  //   cursor.style.display = 'block';
-  //   cursor.style.left = e.pageX + 'px';
-  //   cursor.style.top = e.pageY + 'px';
-  //   console.log(e.pageX, e.pageY);
-  //   //Check if cursor is over a cell
-  //   for (let i = 0; i < boardCells.length; i++) {
-  //     //The cursor is absolutely positioned, so we need to check if the cursor is within the cell, not the cell within the cursor
-  //     const cell = boardCells[i];
-  //     //Get the cell's position relative to the same parent as the cursor
-  //     const cellRect = cell.getBoundingClientRect();
-  //     //get the cursor's position relative to the same parent as the cell
-  //     const cursorRect = cursor.getBoundingClientRect();
-  //     alert(cellRect.left + ' ' + cellRect.right + ' ' + cellRect.top + ' ' + cellRect.bottom);
-  //     alert(cursorRect.left + ' ' + cursorRect.right + ' ' + cursorRect.top + ' ' + cursorRect.bottom);
-  //     if (cursorRect.left >= cellRect.left && cursorRect.right <= cellRect.right && cursorRect.top >= cellRect.top && cursorRect.bottom <= cellRect.bottom) {
-  //       console.log('Cursor is over cell');
-  //       mouseOverCell(e);
-  //       break;
-  //     }
-
-      
-  //   }
-  // } else {
-    // mouseOverCell(e);
-    // for (let i = 0; i < boardCells.length; i++) {
-    //   //Make sure cell is actually a cell
-    //   console.log(boardCells[i].nodeName);
-    
-    //     boardCells[i].addEventListener(eventOverType, mouseOverCell);
-      
-      
-    // }
- // }
+  
 })
 
 function mouseOverCell(e) {
@@ -211,14 +178,46 @@ if(isMobile) {
   })
 }
 
-function checkWord(word) {
+//Check if word is in wordlist file
+async function inWordList(word) {
+  //Read wordlist file 
+
+  
+  //Split wordlist into array
+  let wordlist = loadFile("./wordlist.txt").split("\n");
+  console.log("Checking word: " + word);
+  //Check if word is in wordlist
+  if (wordlist.includes(word)) {
+    console.log(word + " was there!");
+    return true;
+  } else {
+    console.log(word + " was not there!");
+    return false;
+  }
+}
+
+function loadFile(filePath) {
+  var result = null;
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.open("GET", filePath, false);
+  xmlhttp.send();
+  if (xmlhttp.status==200) {
+    result = xmlhttp.responseText;
+    console.log(typeof result)
+  }
+  return result;
+}
+
+async function checkWord(word) {
   console.log("Checking word: " + word);
   console.log(selectedCells)
   pastCells = selectedCells;
   
   word = word.toLowerCase();
   //Check if word is in dictionary
-  if (inWordList(word) && doneWords.indexOf(word) === -1 && word.length > 2) {
+  let wordExists = await inWordList(word);
+  console.log("Done checking word", wordExists);
+  if (wordExists && doneWords.indexOf(word) === -1 && word.length > 2) {
     console.log(word + " was there!");
     score += scoring[word.length];
     scoreLabel.textContent = "Score: " + score;
@@ -296,7 +295,22 @@ function gameOver(){
   
   gameOverDiv.classList.remove('hidden');
   const finalScore = document.getElementById('final-score');
-  finalScore.textContent = "Your final score is: " + score;
+  finalScore.textContent = "Your final score is: " + score + "!";
+  //get url params
+  const urlParams = new URLSearchParams(window.location.search);
+  const pastScore = urlParams.get('score');
+  if(pastScore !== null) {
+    if(score > pastScore) {
+      finalScore.textContent += " You beat the other persons score of " + pastScore + "!";
+    }
+    else if(score < pastScore) {
+      finalScore.textContent += " You lost to the other persons score of " + pastScore + "!";
+    }
+    else {
+      finalScore.textContent += " You tied with the other persons score of " + pastScore + "!";
+    }
+  }
+
 
   
 
@@ -369,29 +383,3 @@ shareBtn.addEventListener('click', function() {
   
 })
 
-//Check if word is in wordlist file
-async function inWordList(word) {
-  //Read wordlist file 
-
-  
-  //Split wordlist into array
-  let wordlist = loadFile("./wordlist.txt").split("\n");
-  //Check if word is in wordlist
-  if (wordlist.includes(word)) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-function loadFile(filePath) {
-  var result = null;
-  var xmlhttp = new XMLHttpRequest();
-  xmlhttp.open("GET", filePath, false);
-  xmlhttp.send();
-  if (xmlhttp.status==200) {
-    result = xmlhttp.responseText;
-    console.log(typeof result)
-  }
-  return result;
-}
