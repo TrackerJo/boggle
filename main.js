@@ -1,5 +1,18 @@
 
 let boardCells = [];
+let eventStartType = 'mousedown';
+let eventMouseOver = 'mouseover';
+let isMobile = false;
+//Check if touch screen
+if ('ontouchstart' in window) {
+  isMobile = true;
+  eventStartType = 'touchmove';
+  eventOverType = 'touchover';
+  //Disable scrolling
+  document.body.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+  }, { passive: false });
+}
 function generateRandomBoggleBoard() {
   const board = [];
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -33,6 +46,13 @@ function fillTableWithBoard(board) {
       cell.classList.add('cell');
       boardCells.push(cell);
       //Add click event listener to each cell
+      cell.addEventListener(eventMouseOver, function(e) {
+        if(!isSelectingWord) {
+          return;
+        }
+        //Check if the cell is already highlighted
+        mouseOverCell(e);
+      });
       
     }
   }
@@ -57,19 +77,7 @@ const gameOverDiv = document.getElementById('game-over');
 const playAgainBtn = document.getElementById('play-again-btn');
 const shareBtn = document.getElementById('share-btn');
 const cursor = document.getElementById('cursor');
-let eventStartType = 'mousedown';
-let eventOverType = 'mouseover';
-let isMobile = false;
-//Check if touch screen
-if ('ontouchstart' in window) {
-  isMobile = true;
-  eventStartType = 'touchmove';
-  eventOverType = 'touchover';
-  //Disable scrolling
-  document.body.addEventListener('touchmove', function(e) {
-    e.preventDefault();
-  }, { passive: false });
-}
+
 const startTime = 100;
 let selectedLetters = "";
 let selectedCells = [];
@@ -94,9 +102,9 @@ window.addEventListener(eventStartType, function(e) {
   const table = document.getElementById('boggle-board');
   const cells = table.getElementsByTagName('td');
   //Check if mouse is over a cell
-  // if(!e.target.classList.contains('cell')) {
-  //   return;
-  // }
+  if(!e.target.classList.contains('cell')) {
+    return;
+  }
 
   isSelectingWord = true;
   // if(isMobile) {
@@ -123,15 +131,15 @@ window.addEventListener(eventStartType, function(e) {
       
   //   }
   // } else {
-    mouseOverCell(e);
-    for (let i = 0; i < boardCells.length; i++) {
-      //Make sure cell is actually a cell
-      console.log(boardCells[i].nodeName);
+    // mouseOverCell(e);
+    // for (let i = 0; i < boardCells.length; i++) {
+    //   //Make sure cell is actually a cell
+    //   console.log(boardCells[i].nodeName);
     
-        boardCells[i].addEventListener(eventOverType, mouseOverCell);
+    //     boardCells[i].addEventListener(eventOverType, mouseOverCell);
       
       
-    }
+    // }
  // }
 })
 
