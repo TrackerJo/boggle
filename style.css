@@ -39,8 +39,8 @@ tr{
 
 #custom-game-prompt{
   background-color:lightblue;
-  width: 30%;
-  height: 35%;
+  width: 400px;
+  height: 300px;
   position: absolute;
 
   border: 1px solid;
@@ -48,6 +48,14 @@ tr{
   padding: 10px;
   text-align: center;
 
+}
+
+/*Check if on mobile*/
+@media only screen and (max-width: 600px) {
+  #custom-game-prompt{
+    width: 90%;
+    height: 90%;
+  }
 }
 
 .inactive{
