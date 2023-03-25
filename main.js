@@ -106,10 +106,13 @@ window.addEventListener(eventStartType, function(e) {
     console.log(e.pageX, e.pageY);
     //Check if cursor is over a cell
     for (let i = 0; i < boardCells.length; i++) {
-      if(boardCells[i].contains(cursor)) {
+      //The cursor is absolutely positioned, so we need to check if the cursor is within the cell
+      const cell = boardCells[i];
+      const cellRect = cell.getBoundingClientRect();
+      if (e.pageX >= cellRect.left && e.pageX <= cellRect.right && e.pageY >= cellRect.top && e.pageY <= cellRect.bottom) {
         mouseOverCell(e);
-        break;
       }
+      
     }
   } else {
     mouseOverCell(e);
