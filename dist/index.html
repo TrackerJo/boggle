@@ -23,8 +23,8 @@
     <meta property="twitter:title" content="Boggle - By TrackerJo">
     <meta property="twitter:description" content="Play Boggle by yourself or against someone else's score and board to see if you can beat them!">
     <meta property="twitter:image" content="http://www.baggle.org/img/grille.png">
-    <script type="module" crossorigin src="/boggle/assets/index-3b87c647.js"></script>
-    <link rel="stylesheet" href="/boggle/assets/index-b6329c3b.css">
+    <script type="module" crossorigin src="/boggle/assets/index-f4a80eff.js"></script>
+    <link rel="stylesheet" href="/boggle/assets/index-c17cd773.css">
   </head>
   <body>
     <div id="app">
@@ -53,11 +53,14 @@
         <div id="custom-game-prompt" class="hidden">
           <h2>Custom Game</h2>
           <p>Enter a board and a time limit to create a custom game. The board must be 16 letters long, each row is seperated by a period, and the time limit must be a number between 1 and 10.</p>
+          <label for="custom-time">Time Limit (in Seconds)</label>
+          <input type="number" id="custom-time" placeholder="Ex: 60" min="0">
+          <br>
           <label for="custom-board">Board (Optional)</label>
           <input type="text" id="custom-board" placeholder="Ex: ABDW.ADWQ.QDQW.QDWQ">
           <br>
-          <label for="custom-time">Time Limit (in Seconds)</label>
-          <input type="number" id="custom-time" placeholder="Ex: 60" min="0">
+          <label for="custom-time">Minimum Word Length (Optional)</label>
+          <input type="number" id="custom-min-length" placeholder="Ex: 3" min="2" max="16">
           <br>
           <br>
           <button id="custom-game-start-btn">Start</button>
