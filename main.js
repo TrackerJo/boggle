@@ -206,7 +206,7 @@ window.addEventListener('mouseup', function(e) {
 
 if(isMobile) {
   submitBtn.addEventListener('click', function(e) {
-    checkWord(wordInput.value);
+    checkWord(selectedLetters);
     clearSelectedLetters(true);
   })
 }
