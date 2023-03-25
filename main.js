@@ -48,6 +48,7 @@ function fillTableWithBoard(board) {
       //Add click event listener to each cell
       cell.addEventListener(eventMouseOver, function(e) {
         if(!isSelectingWord) {
+          console.log('Not selecting word');
           return;
         }
         //Check if the cell is already highlighted
