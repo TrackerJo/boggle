@@ -34,3 +34,14 @@ tr{
 .hidden{
   display: none;
 }
+
+#cursor{
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  user-select: none;
+  -drag: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+}

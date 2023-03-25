@@ -56,11 +56,13 @@ const timeLabel = document.getElementById('time');
 const gameOverDiv = document.getElementById('game-over');
 const playAgainBtn = document.getElementById('play-again-btn');
 const shareBtn = document.getElementById('share-btn');
+const cursor = document.getElementById('cursor');
 let eventStartType = 'mousedown';
 let eventOverType = 'mouseover';
-
+let isMobile = false;
 //Check if touch screen
 if ('ontouchstart' in window) {
+  isMobile = true;
   eventStartType = 'touchstart';
   eventOverType = 'touchmove';
   //Disable scrolling
@@ -97,6 +99,20 @@ window.addEventListener(eventStartType, function(e) {
   }
 
   isSelectingWord = true;
+  if(isMobile) {
+    cursor.style.display = 'block';
+    cursor.style.left = e.pageX + 'px';
+    cursor.style.top = e.pageY + 'px';
+    console.log(e.pageX, e.pageY);
+    //Check if cursor is over a cell
+    for (let i = 0; i < boardCells.length; i++) {
+      if(boardCells[i].contains(cursor)) {
+        mouseOverCell(e);
+        break;
+      }
+    }
+  }
+
 
   mouseOverCell(e);
   for (let i = 0; i < boardCells.length; i++) {
