@@ -8,10 +8,7 @@ if ('ontouchstart' in window) {
   isMobile = true;
   eventStartType = 'touchmove';
   eventMouseOver = 'touchover';
-  //Disable scrolling
-  document.body.addEventListener('touchmove', function(e) {
-    e.preventDefault();
-  }, { passive: false });
+  
 }
 function generateRandomBoggleBoard() {
   const board = [];
