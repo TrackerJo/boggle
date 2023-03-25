@@ -7,7 +7,7 @@ let isMobile = false;
 if ('ontouchstart' in window) {
   isMobile = true;
   eventStartType = 'touchmove';
-  eventMouseOver = 'touchover';
+  eventMouseOver = 'touchenter';
   
 }
 function generateRandomBoggleBoard() {
