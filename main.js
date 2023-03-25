@@ -7,7 +7,7 @@ let isMobile = false;
 if ('ontouchstart' in window) {
   isMobile = true;
   eventStartType = 'touchmove';
-  eventMouseOver = 'touchenter';
+  eventMouseOver = 'click';
   
 }
 function generateRandomBoggleBoard() {
@@ -44,7 +44,7 @@ function fillTableWithBoard(board) {
       boardCells.push(cell);
       //Add click event listener to each cell
       cell.addEventListener(eventMouseOver, function(e) {
-        if(!isSelectingWord) {
+        if(!isSelectingWord && !isMobile) {
           console.log('Not selecting word');
           return;
         }
