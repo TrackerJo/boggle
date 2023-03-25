@@ -56,6 +56,14 @@ const timeLabel = document.getElementById('time');
 const gameOverDiv = document.getElementById('game-over');
 const playAgainBtn = document.getElementById('play-again-btn');
 const shareBtn = document.getElementById('share-btn');
+let eventStartType = 'mousedown';
+let eventOverType = 'mouseover';
+
+//Check if touch screen
+if ('ontouchstart' in window) {
+  eventStartType = 'touchstart';
+  eventOverType = 'touchmove';
+}
 const startTime = 10;
 let selectedLetters = "";
 let selectedCells = [];
@@ -76,7 +84,7 @@ fillTableWithBoard(board);
 console.log(boardCells)
 
 //On mouse drag, highlight all cells that are being dragged over
-window.addEventListener('mousedown', function(e) {
+window.addEventListener(eventStartType, function(e) {
   const table = document.getElementById('boggle-board');
   const cells = table.getElementsByTagName('td');
   //Check if mouse is over a cell
@@ -91,7 +99,7 @@ window.addEventListener('mousedown', function(e) {
     //Make sure cell is actually a cell
     console.log(boardCells[i].nodeName);
    
-      boardCells[i].addEventListener('mouseover', mouseOverCell);
+      boardCells[i].addEventListener(eventOverType, mouseOverCell);
     
     
   }
@@ -161,8 +169,10 @@ function checkWord(word) {
   console.log("Checking word: " + word);
   console.log(selectedCells)
   pastCells = selectedCells;
+  
+  word = word.toLowerCase();
   //Check if word is in dictionary
-  if (Word_List.isInList(word) && doneWords.indexOf(word) === -1 && word.length > 2) {
+  if (inWordList(word) && doneWords.indexOf(word) === -1 && word.length > 2) {
     console.log(word + " was there!");
     score += scoring[word.length];
     scoreLabel.textContent = "Score: " + score;
@@ -313,3 +323,29 @@ shareBtn.addEventListener('click', function() {
   
 })
 
+//Check if word is in wordlist file
+async function inWordList(word) {
+  //Read wordlist file 
+
+  
+  //Split wordlist into array
+  let wordlist = loadFile("./wordlist.txt").split("\n");
+  //Check if word is in wordlist
+  if (wordlist.includes(word)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function loadFile(filePath) {
+  var result = null;
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.open("GET", filePath, false);
+  xmlhttp.send();
+  if (xmlhttp.status==200) {
+    result = xmlhttp.responseText;
+    console.log(typeof result)
+  }
+  return result;
+}
