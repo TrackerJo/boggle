@@ -1,5 +1,4 @@
 
-import wordlistURL from './wordlist.txt';
 
 
 const submitBtn = document.getElementById('submit-word');
@@ -204,7 +203,7 @@ async function inWordList(word) {
 
   
   //Split wordlist into array
-  let wordlist = await loadFile(wordlistURL)
+  let wordlist = await loadFile("./wordlist.txt")
   wordlist = wordlist.split("\n");
   console.log("Checking word: " + word);
   //Check if word is in wordlist
