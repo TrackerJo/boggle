@@ -398,7 +398,7 @@ shareBtn.addEventListener('click', function() {
   let url = window.location.href;
   //Remove everything after the ? in the url
   url = url.split('?')[0];
-  url += "challenge/"
+  url += "challenge.html/"
   //Add the boardSeed to the url
   url += "?boardSeed=" + boardSeed;
   //Add the score to the url
