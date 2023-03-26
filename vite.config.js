@@ -14,7 +14,7 @@ export default defineConfig({
       emptyOutDir: true,
       input: {
         index: resolve(root,  'index.html'),
-        AddProblem: resolve(root,  'challenge' ,'index.html'),
+        Challenge: resolve(root,  'challenge' ,'index.html'),
       }
     }
   })
