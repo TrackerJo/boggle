@@ -393,7 +393,7 @@ shareResultsBtn.addEventListener('click', function() {
     let url = window.location.href;
     
     //Remove everything after the ? in the url
-    url = url.split('?')[0];
+    url = url.split('challenge.html')[0];
     //Add the scores to the url
     url += "results.html/";
     url += "?score1=" + playerOneScore;
