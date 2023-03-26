@@ -1,23 +1,16 @@
 
-import wordlistURL from './wordlist.txt';
+import wordlistURL from '../wordlist.txt';
 
 
 const submitBtn = document.getElementById('submit-word');
 const boggleDiv = document.getElementById('board-div');
 const startBtn = document.getElementById('start-btn');
-const customGameBtn = document.getElementById('custom-game-btn');
-const customGamePrompt = document.getElementById('custom-game-prompt');
-const customGameSeedInput = document.getElementById('custom-board');
-const customGameTimeInput = document.getElementById('custom-time');
-const customGameMinLengthInput = document.getElementById('custom-min-length');
-const customGameStartBtn = document.getElementById('custom-game-start-btn');
 const wordListDiv = document.getElementById('word-list');
 const scoreLabel = document.getElementById('score');
 const timeLabel = document.getElementById('time');
 const gameOverDiv = document.getElementById('game-over');
 const playAgainBtn = document.getElementById('play-again-btn');
-const shareBtn = document.getElementById('share-btn');
-
+const shareResultsBtn = document.getElementById('share-results-btn');
 
 let startTime = 100;
 let minLength = 3;
@@ -353,7 +346,7 @@ startBtn.addEventListener('click', function() {
 })
 
 playAgainBtn.addEventListener('click', function() {
-  location.reload();
+    window.location.href = "/";
 })
 
 function createBoardSeed(board){
@@ -392,100 +385,26 @@ function loadBoard(boardSeed){
 
 console.log(createBoardSeed(board));
 
-shareBtn.addEventListener('click', function() {
-  let boardSeed = createBoardSeed(board);
-  //Get current url
-  let url = window.location.href;
-  //Remove everything after the ? in the url
-  url = url.split('?')[0];
-  url += "challenge/"
-  //Add the boardSeed to the url
-  url += "?boardSeed=" + boardSeed;
-  //Add the score to the url
-  url += "&score=" + score;
-  if(isCustomGame){
-    url += "&time=" + startTime;
-    url += "&minLength=" + minLength;
-  }
-  
-  navigator.clipboard.writeText(url).then(function() {
-    console.log('Async: Copying to clipboard was successful!');
-    alert("Copied to clipboard!");
-  }, function(err) {
-    console.error('Async: Could not copy text: ', err);
-  });
-  
-})
+shareResultsBtn.addEventListener('click', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const playerOneScore = urlParams.get('score');
+    const playerTwoScore = score; 
 
-customGameBtn.addEventListener('click', function() {
-  if(customGamePrompt.classList.contains('inactive')) {
-    customGamePrompt.classList.remove('inactive');
-  }
-  else{
-    customGamePrompt.classList.remove('hidden');
-  }
-  customGamePrompt.classList.add('active');
-  customGamePromptOpen = true;
-
-  
-  
-})
-
-//Check when escape is pressed
-document.addEventListener('keydown', function(event) {
-  if(event.key === "Escape" && customGamePromptOpen) {
-    customGamePrompt.classList.remove('active');
-    customGamePrompt.classList.add('inactive');
-    customGamePromptOpen = false;
-  }
-})
-
-function loadCustomBoard(boardSeed){
-  let board = [];
-  let decodedBoardSeed = boardSeed.split('.');
-  for(let i = 0; i < decodedBoardSeed.length; i++){
-    const row = [];
-    for (let index = 0; index < 4; index++) {
-      const letter = decodedBoardSeed[i].charAt(index);
-      row.push(letter);
-    }
-    board.push(row);
-  }
-  return board;
-}
-
-function clearBoardDiv(){
- //Clear the board table
- let table = document.getElementById('boggle-board');
-  table.innerHTML = "";
-}
-
-customGameStartBtn.addEventListener('click', function() {
-  let boardSeed = customGameSeedInput.value;
-  let customTime = customGameTimeInput.value;
-  let minWordLength = customGameMinLengthInput.value;
-  if(boardSeed.length === 19) {
-    board = loadCustomBoard(boardSeed);
-    clearBoardDiv();
-    fillTableWithBoard(board);
-  }
-  else if(boardSeed.length !== 0){
+    //Get current url
+    let url = window.location.href;
     
-    alert("Invalid board seed!");
-    return
-  }
-  if(minWordLength.length !== 0) {
-    minWordLength = parseInt(minWordLength);
-    minLength = minWordLength;
-  }
-  isCustomGame = true;
-  customGamePrompt.classList.remove('active');
-  customGamePrompt.classList.add('inactive');
-  customGamePromptOpen = false;
-  startTime = customTime;
-  boggleDiv.classList.remove('hidden');
-  startBtn.parentElement.classList.add('hidden');
-  startTimer();
+    //Remove everything after the ? in the url
+    url = url.split('?')[0];
+    //Add the scores to the url
+    url += "results.html";
+    url += "?score1=" + playerOneScore;
+    url += "&score2=" + playerTwoScore;
 
-  
+    //Copy to clipboard
+    navigator.clipboard.writeText(url).then(function() {
+      console.log('Async: Copying to clipboard was successful!');
+      alert("Copied to clipboard!");
+    }, function(err) {
+      console.error('Async: Could not copy text: ', err);
+    });
 })
