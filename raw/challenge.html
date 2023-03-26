@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css">
+      <!-- Primary Meta Tags -->
+    <title>A friend has challenged you to a game of Boggle</title>
+    <meta name="title" content="A friend has challenged you to a game of Boggle">
+    <meta name="description" content="Play with the same board your opponent has and try to beat their score">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://trackerjo.github.io/boggle/">
+    <meta property="og:title" content="A friend has challenged you to a game of Boggle">
+    <meta property="og:description" content="Play with the same board your opponent has and try to beat their score">
+    <meta property="og:image" content="http://www.baggle.org/img/grille.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://trackerjo.github.io/boggle/">
+    <meta property="twitter:title" content="A friend has challenged you to a game of Boggle">
+    <meta property="twitter:description" content="Play with the same board your opponent has and try to beat their score">
+    <meta property="twitter:image" content="http://www.baggle.org/img/grille.png">
+  </head>
+  <body>
+    <div id="app">
+      <h1>You've been challenged to a game of Boggle!</h1>
+      
+      <div id="board-div" class="hidden">
+        <h3 id="score">Score: 0</h3>
+        <h3 id="time">Time: </h3>
+        <table id="boggle-board" class="noselect">
+          
+        </table>
+        <button id="submit-word" class="hidden">Submit Word</button>
+        <div id="word-list-div">
+          <h2>Words</h2>
+          <ul id="word-list">
+            
+          </ul>
+        </div>
+      </div>
+     
+      <div id="welcome">
+        <h2>How to play</h2>
+        <p>Click on the letters to form words. Words must be at least 3 letters long and must be in the dictionary. Find as many words as you can to try to beat the other person's score before time runs out. Good luck!</p>
+        <button id="start-btn">Start Challenge</button>
+      </div>
+      <div id="game-over" class="hidden">
+        <h2>Game Over</h2>
+        <p id="final-score">Your score is 0</span></p>
+        <button id="play-again-btn">Play Again</button>
+        <button id="share-results-btn">Share Challenge Results</button>
+      </div>
+    </div>
+
+
+
+    
+    <script type="module" src="./challenge.html"></script>
+  </body>
+</html>
