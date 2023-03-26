@@ -395,7 +395,7 @@ shareResultsBtn.addEventListener('click', function() {
     //Remove everything after the ? in the url
     url = url.split('challenge.html')[0];
     //Add the scores to the url
-    url += "results.html/";
+    url += "results.html";
     url += "?score1=" + playerOneScore;
     url += "&score2=" + playerTwoScore;
 
