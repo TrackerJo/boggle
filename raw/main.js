@@ -4,21 +4,22 @@
 const submitBtn = document.getElementById('submit-word');
 const boggleDiv = document.getElementById('board-div');
 const startBtn = document.getElementById('start-btn');
+const howToPlayBtn = document.getElementById('how-to-btn');
+const howToPlayPrompt = document.getElementById('how-to-prompt');
+const howToPlayCloseBtn = document.getElementById('how-to-close-btn');
 const customGameBtn = document.getElementById('custom-game-btn');
 const customGamePrompt = document.getElementById('custom-game-prompt');
 const customGameSeedInput = document.getElementById('custom-board');
 const customGameTimeInput = document.getElementById('custom-time');
 const customGameMinLengthInput = document.getElementById('custom-min-length');
 const customGameStartBtn = document.getElementById('custom-game-start-btn');
-const wordListDiv = document.getElementById('word-list');
 const scoreLabel = document.getElementById('score');
 const timeLabel = document.getElementById('time');
 const gameOverDiv = document.getElementById('game-over');
 const playAgainBtn = document.getElementById('play-again-btn');
 const shareBtn = document.getElementById('share-btn');
 
-
-let startTime = 100;
+let startTime = 2;
 let minLength = 3;
 let selectedLetters = "";
 let selectedCells = [];
@@ -26,6 +27,7 @@ let pastCells = [];
 let score = 0;
 let doneWords = [];
 let boardCells = [];
+let howToPlayPromptOpen = false;
 let customGamePromptOpen = false;
 let isCustomGame = false;
 
@@ -176,7 +178,7 @@ function clearSelectedLetters(completedWord) {
   for (let i = 0; i < cells.length; i++) {
     if(!completedWord)
     {
-      cells[i].style.backgroundColor = 'white';
+      cells[i].style.backgroundColor = 'lightblue';
     }
   }
   //Remove event listeners from cells
@@ -240,7 +242,7 @@ async function checkWord(word) {
   console.log(selectedCells)
   pastCells = selectedCells;
   
-  word = word.toLowerCase();
+  word = word.toUpperCase();
   //Check if word is in dictionary
   let wordExists = await inWordList(word);
   console.log("Done checking word", wordExists);
@@ -251,9 +253,7 @@ async function checkWord(word) {
     console.log("Your Score is: " + score);
     doneWords.push(word);
    
-    const wordLi = document.createElement('li');
-    wordLi.textContent = word + " - " + scoring[word.length];
-    wordListDiv.appendChild(wordLi);
+   
 
     //Highlight cells green
     for (let i = 0; i < pastCells.length; i++) {
@@ -266,7 +266,7 @@ async function checkWord(word) {
     setTimeout(function() {
       for (let i = 0; i < pastCells.length; i++) {
         console.log(pastCells[i]);
-        pastCells[i].style.backgroundColor = 'white';
+        pastCells[i].style.backgroundColor = 'lightblue';
         //Then go back to white after 1 second
        
       }
@@ -285,7 +285,7 @@ async function checkWord(word) {
     setTimeout(function() {
       for (let i = 0; i < pastCells.length; i++) {
         console.log(pastCells[i]);
-        pastCells[i].style.backgroundColor = 'white';
+        pastCells[i].style.backgroundColor = 'lightblue';
         //Then go back to white after 1 second
        
       }
@@ -347,7 +347,7 @@ function gameOver(){
 
 startBtn.addEventListener('click', function() {
   boggleDiv.classList.remove('hidden');
-  startBtn.parentElement.classList.add('hidden');
+  startBtn.parentElement.parentElement.classList.add('hidden');
   startTimer();
 })
 
@@ -437,6 +437,11 @@ document.addEventListener('keydown', function(event) {
     customGamePrompt.classList.add('inactive');
     customGamePromptOpen = false;
   }
+  if(event.key === "Escape" && howToPlayPromptOpen){
+    howToPlayPrompt.classList.remove('active');
+    howToPlayPrompt.classList.add('inactive');
+    howToPlayPromptOpen = false;
+  }
 })
 
 function loadCustomBoard(boardSeed){
@@ -487,4 +492,21 @@ customGameStartBtn.addEventListener('click', function() {
   startTimer();
 
   
+})
+
+howToPlayBtn.addEventListener('click', function() {
+  if(howToPlayPrompt.classList.contains('inactive')) {
+    howToPlayPrompt.classList.remove('inactive');
+  }
+  else{
+    howToPlayPrompt.classList.remove('hidden');
+  }
+  howToPlayPrompt.classList.add('active');
+  howToPlayPromptOpen = true;
+})
+
+howToPlayCloseBtn.addEventListener('click', function() {
+  howToPlayPrompt.classList.remove('active');
+  howToPlayPrompt.classList.add('inactive');
+  howToPlayPromptOpen = false;
 })

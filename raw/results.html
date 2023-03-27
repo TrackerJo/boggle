@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./results.css">
     <!-- Primary Meta Tags -->
     <title>Boggle Challenge Results</title>
     <meta name="title" content="Boggle Challenge Results">
@@ -24,16 +25,21 @@
     <meta property="twitter:image" content="http://www.baggle.org/img/grille.png">
 </head>
 <body>
-    <h1>Boggle Challenge Results</h1>
-    <p>Here are the results of the challenge:</p>
-    <p id="playerOne">Player 1 (Person who sent the challenge invite) Score: </p>
-    <p id="playerTwo">Player 2 (Person who recieved the invite) Score: </p>
-<!-- And the winner is -->
-    <p id="winner">And the winner is: </p>
+    <div class="background">
 
-    <p>Thanks for playing!</p>
+    </div>
+    <div id="app">
+        <h1 class="title">Boggle Challenge Results</h1>
+        <p>Here are the results of the challenge:</p>
+        <p id="playerOne">Player 1 (Person who sent the challenge invite) Score: </p>
+        <p id="playerTwo">Player 2 (Person who recieved the invite) Score: </p>
+    <!-- And the winner is -->
+        <p id="winner">And the winner is: </p>
 
-    <a href="./">Back to home</a>
+        <p>Thanks for playing!</p>
+
+        <button id="back-home">Back to home</button>
+    </div>
     <!-- Import result.js -->
     <script type="module" src="./results.js"></script>
 </body>

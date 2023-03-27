@@ -1,0 +1,292 @@
+:root {
+    --border: rgb(3, 169, 244);
+    
+  
+    --b1: rgb(145, 255, 20);
+    --b2: rgb(73, 140, 247);
+    --b3: rgb(83, 129, 255);
+    --b4: rgb(195, 255, 83);
+  
+  }
+  
+  #app{
+  /*Center the app*/
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /*Create an animation so it looks the the popup came from the top of the screen*/
+    animation: popupEnter 0.5s;
+    width: 100%;
+    /* Center contents in center of screen */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+  }
+
+  #app p{
+    font-size: 20px;
+  }
+
+  #welcome{
+    text-align: center;
+  }
+
+  #welcome h2 {
+    margin-top: -120px;
+  }
+  
+  
+  .title{
+    font-size: 100px;
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+    top: 0px;
+    font: italic bold 60px/60px Georgia, serif;
+    color: darkblue;
+  }
+  
+  button{
+    background-color: lightgreen;
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    font-size: larger;
+    width: 20%;
+    
+  }
+  
+  .menu{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: -100px;
+    gap: 20px;
+  }
+  
+  .background{
+    background: linear-gradient(
+      130deg, 
+      var(--b1) 0% 20%, 
+      var(--b2) 50%, 
+      var(--b3) 70%, 
+      var(--b4) 100%
+    );
+    background-position: 0% 0%;
+    background-size: 100% 100%;
+    content: "";
+    height: 100%;
+    left: 0px;
+    pointer-events: none;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    z-index: -1;
+  }
+  
+  table, th, td {
+    border: 1px solid;
+    border-radius: 10px;
+  }
+  
+  table{
+    width: fit-content;
+    border-spacing: 15px;
+    background-color: lightblue
+  
+  }
+  
+  td{
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    text-align: center;
+    cursor: pointer;
+    background-color: lightblue;
+    
+  }
+  
+  tr{
+    padding: 50px;
+  }
+  
+  .noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+  }
+  
+  .hidden{
+    display: none !important;
+  }
+  
+  #custom-game-prompt{
+    background-color:lightblue;
+    width: 400px;
+    height: 300px;
+    position: absolute;
+  
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+  
+  }
+  
+  #how-to-prompt{
+    background-color:lightblue;
+    width: 400px;
+    height: 300px;
+    position: absolute;
+  
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+  
+  }
+  
+  
+  .inactive{
+    top: -200%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    animation: popupExit 0.5s;
+  }
+  
+  .active {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /*Create an animation so it looks the the popup came from the top of the screen*/
+    animation: popupEnter 0.5s;
+  
+  }
+  
+  @keyframes popupEnter {
+    0% {
+      top: -150%;
+    }
+    100% {
+      top: 50%;
+    }
+  }
+  
+  @keyframes popupExit {
+    0% {
+      top: 50%;
+    }
+    100% {
+      top: -200%;
+    }
+  }
+  
+  #custom-game-prompt h1{
+    font-size: xx-large;
+  }
+  
+  #custom-game-start-btn{
+    background-color: lightgreen;
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    font-size: large;
+  }
+  
+  #score{
+    float: left;
+  }
+  
+  #time{
+    float: right;
+  }
+  
+  #game-over h2{
+  
+    font-size: xx-large;
+    font: italic bold 80px/80px Georgia, serif;
+    color: darkblue;
+  
+  
+    
+  }
+  
+  #game-over button{
+    background-color: lightgreen;
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    font-size: large;
+    width: 30%;
+    
+  }
+  
+  #game-over p{
+    text-align: center;
+    font-size: 30px;
+    margin-top: -50px;
+   
+  
+  }
+  
+  /*Check if on mobile*/
+  @media only screen and (max-width: 600px) {
+    #custom-game-prompt{
+      width: 80%;
+      height: 70%;
+    }
+  
+    #how-to-prompt{
+      width: 80%;
+      height: 70%;
+    }
+  
+    .title{
+      font-size: 100px;
+      text-align: center;
+      margin-bottom: 20px;
+      position: relative;
+      top: 0px;
+      font: italic bold 40px/40px Georgia, serif;
+      color: darkblue;
+    }
+  
+    #board-div{
+      /*flex using to create two columns*/
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      width: 100%;
+  
+    }
+  
+    button{
+      width: 50%;
+    }
+  
+    #submit-word{
+      /* Center horizontally */
+     position: relative;
+      left: 25%;
+  
+      margin-top: 20px;
+  
+  
+    }
+  
+  }
+  
