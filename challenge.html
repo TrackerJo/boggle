@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="./vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./challenge.css">
       <!-- Primary Meta Tags -->
     <title>A friend has challenged you to a game of Boggle</title>
     <meta name="title" content="A friend has challenged you to a game of Boggle">
@@ -25,25 +25,29 @@
     <meta property="twitter:image" content="http://www.baggle.org/img/grille.png">
   </head>
   <body>
+    <div class="background">
+
+    </div>
     <div id="app">
-      <h1>You've been challenged to a game of Boggle!</h1>
+     
       
       <div id="board-div" class="hidden">
-        <h3 id="score">Score: 0</h3>
-        <h3 id="time">Time: </h3>
-        <table id="boggle-board" class="noselect">
+        <div class="game-board">
+          <div>
+            <h3 id="score">Score: 0</h3>
           
-        </table>
-        <button id="submit-word" class="hidden">Submit Word</button>
-        <div id="word-list-div">
-          <h2>Words</h2>
-          <ul id="word-list">
+            <h3 id="time">Time: </h3>
+          </div>
+          
+          <table id="boggle-board" class="noselect">
             
-          </ul>
+          </table>
+          <button id="submit-word" class="hidden">Submit Word</button>
         </div>
       </div>
      
       <div id="welcome">
+        <h1 class="title">You've been challenged to a game of Boggle!</h1>
         <h2>How to play</h2>
         <p>Click on the letters to form words. Words must be at least 3 letters long and must be in the dictionary. Find as many words as you can to try to beat the other person's score before time runs out. Good luck!</p>
         <button id="start-btn">Start Challenge</button>

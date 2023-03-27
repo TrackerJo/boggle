@@ -5,7 +5,7 @@ const winner = document.querySelector('#winner');
 const urlParams = new URLSearchParams(window.location.search);
 const playerOneScore = parseInt(urlParams.get('score1'));
 const playerTwoScore = parseInt(urlParams.get('score2'));
-
+const backHome = document.querySelector('#back-home');
 //Set player scores
 playerOne.innerHTML += playerOneScore;
 playerTwo.innerHTML += playerTwoScore;
@@ -21,4 +21,6 @@ else {
     winner.innerHTML += 'Draw';
 }
 
-
+backHome.addEventListener('click', () => {
+    window.location.href = './';
+})

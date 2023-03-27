@@ -25,29 +25,35 @@
     <meta property="twitter:image" content="http://www.baggle.org/img/grille.png">
   </head>
   <body>
+    <div class="background">
+
+    </div>
     <div id="app">
-      <h1>Welcome to Boggle</h1>
+      
       
       <div id="board-div" class="hidden">
-        <h3 id="score">Score: 0</h3>
-        <h3 id="time">Time: </h3>
-        <table id="boggle-board" class="noselect">
+        <div class="game-board">
+          <div>
+            <h3 id="score">Score: 0</h3>
           
-        </table>
-        <button id="submit-word" class="hidden">Submit Word</button>
-        <div id="word-list-div">
-          <h2>Words</h2>
-          <ul id="word-list">
+            <h3 id="time">Time: </h3>
+          </div>
+          
+          <table id="boggle-board" class="noselect">
             
-          </ul>
+          </table>
+          <button id="submit-word" class="hidden">Submit Word</button>
         </div>
+      
       </div>
      
       <div id="welcome">
-        <h2>How to play</h2>
-        <p>Click on the letters to form words. Words must be at least 3 letters long and must be in the dictionary. Find as many words as you can before time runs out. Good luck!</p>
-        <button id="start-btn">Start</button>
-        <button id="custom-game-btn">Create Custom Game</button>
+        <h1 class="title">Welcome to Boggle</h1>
+        <div class="menu">
+          <button id="start-btn">Start</button>
+          <button id="custom-game-btn">Create Custom Game</button>
+          <button id="how-to-btn">How to Play</button>
+        </div>
         <div id="custom-game-prompt" class="hidden">
           <h2>Custom Game</h2>
           <p>Enter a board and a time limit to create a custom game. The board must be 16 letters long, each row is seperated by a period, and the time limit must be a number between 1 and 10.</p>
@@ -63,6 +69,11 @@
           <br>
           <button id="custom-game-start-btn">Start</button>
         </div>
+        <div id="how-to-prompt" class="hidden">
+          <h2>How to Play</h2>
+          <p>Click on the letters to form words. Words must be at least 3 letters long and must be in the dictionary. Find as many words as you can before time runs out. Good luck!</p>
+          <button id="how-to-close-btn">Close</button>
+        </div>  
       </div>
       <div id="game-over" class="hidden">
         <h2>Game Over</h2>

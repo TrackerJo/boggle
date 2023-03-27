@@ -169,7 +169,7 @@ function clearSelectedLetters(completedWord) {
   for (let i = 0; i < cells.length; i++) {
     if(!completedWord)
     {
-      cells[i].style.backgroundColor = 'white';
+      cells[i].style.backgroundColor = 'lightblue';
     }
   }
   //Remove event listeners from cells
@@ -233,7 +233,7 @@ async function checkWord(word) {
   console.log(selectedCells)
   pastCells = selectedCells;
   
-  word = word.toLowerCase();
+  word = word.toUpperCase();
   //Check if word is in dictionary
   let wordExists = await inWordList(word);
   console.log("Done checking word", wordExists);
@@ -244,9 +244,7 @@ async function checkWord(word) {
     console.log("Your Score is: " + score);
     doneWords.push(word);
    
-    const wordLi = document.createElement('li');
-    wordLi.textContent = word + " - " + scoring[word.length];
-    wordListDiv.appendChild(wordLi);
+    
 
     //Highlight cells green
     for (let i = 0; i < pastCells.length; i++) {
@@ -259,7 +257,7 @@ async function checkWord(word) {
     setTimeout(function() {
       for (let i = 0; i < pastCells.length; i++) {
         console.log(pastCells[i]);
-        pastCells[i].style.backgroundColor = 'white';
+        pastCells[i].style.backgroundColor = 'lightblue';
         //Then go back to white after 1 second
        
       }
@@ -278,7 +276,7 @@ async function checkWord(word) {
     setTimeout(function() {
       for (let i = 0; i < pastCells.length; i++) {
         console.log(pastCells[i]);
-        pastCells[i].style.backgroundColor = 'white';
+        pastCells[i].style.backgroundColor = 'lightblue';
         //Then go back to white after 1 second
        
       }
