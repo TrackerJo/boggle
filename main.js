@@ -19,7 +19,7 @@ const gameOverDiv = document.getElementById('game-over');
 const playAgainBtn = document.getElementById('play-again-btn');
 const shareBtn = document.getElementById('share-btn');
 
-let startTime = 2;
+let startTime = 100;
 let minLength = 3;
 let selectedLetters = "";
 let selectedCells = [];
